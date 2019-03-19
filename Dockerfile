@@ -6,3 +6,6 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     apk add --no-cache \
       chromium@edge \
       nss@edge
+
+RUN echo @edge http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
+    apk add wqy-zenhei@edge
