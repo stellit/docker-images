@@ -9,3 +9,5 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
 
 RUN echo @edge http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     apk add wqy-zenhei@edge
+
+RUN apk --update add fontconfig ttf-dejavu
