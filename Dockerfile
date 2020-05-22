@@ -1,4 +1,4 @@
-FROM node:11.11.0-alpine
+FROM node:12.16.3-alpine
 
 LABEL MAINTAINER="stellit.woo@gmail.com"
 
