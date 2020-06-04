@@ -1,21 +1,24 @@
-FROM node:12.16.3-alpine
+FROM node:12.18.0-buster
 
 LABEL MAINTAINER="stellit.woo@gmail.com"
 
 ENV CHROME_BIN=/usr/bin/chromium-browser
-RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
-    echo @edge http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
-    apk -U --no-cache update && apk -U --no-cache --allow-untrusted add \
-      xorg-server \
-      ttf-freefont \
-      dbus \
-      wqy-zenhei@edge \
-      bash \
-      bash-doc \
-      bash-completion -f \
-      zlib-dev \
-      chromium@edge \
-      nss@edge \
-      wqy-zenhei@edge && \
-    apk --update add fontconfig ttf-dejavu
+
+# CREATE workdir
+RUN mkdir -p /workdir
+
+WORKDIR /workdir
+
+RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+
+RUN apt-get update
+
+RUN apt-get -y install rpm
+
+RUN curl "https://archive.apache.org/dist/pulsar/pulsar-2.5.2/RPMS/apache-pulsar-client-2.5.2-1.x86_64.rpm" -o /workdir/pulsar-client.rpm
+RUN curl "https://archive.apache.org/dist/pulsar/pulsar-2.5.2/RPMS/apache-pulsar-client-devel-2.5.2-1.x86_64.rpm" -o /workdir/pulsar-client-dev.rpm
+
+RUN rpm -ivh /workdir/pulsar-client.rpm
+RUN rpm -ivh /workdir/pulsar-client-dev.rpm
+
+RUN apt-get -y install chromium chromium-l10n fonts-wqy-zenhei ttf-dejavu
