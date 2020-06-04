@@ -10,8 +10,8 @@ RUN apt-get update
 
 RUN apt-get -y install rpm
 
-RUN curl "https://archive.apache.org/dist/pulsar/pulsar-2.5.2/RPMS/apache-pulsar-client-2.5.2-1.x86_64.rpm" -o /workdir/pulsar-client.rpm
-RUN curl "https://archive.apache.org/dist/pulsar/pulsar-2.5.2/RPMS/apache-pulsar-client-devel-2.5.2-1.x86_64.rpm" -o /workdir/pulsar-client-dev.rpm
+COPY apache-pulsar-client.rpm /workdir/pulsar-client.rpm
+COPY apache-pulsar-client-devel.rpm /workdir/pulsar-client-dev.rpm
 
 RUN rpm -ivh /workdir/pulsar-client.rpm
 RUN rpm -ivh /workdir/pulsar-client-dev.rpm
