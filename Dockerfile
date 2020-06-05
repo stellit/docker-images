@@ -10,11 +10,11 @@ RUN apk add --update --no-cache \
       wqy-zenhei@edge \
       fontconfig ttf-dejavu
 
-RUN apk add --update \
-      alpine-sdk \
-      libffi-dev \
-      openssl-dev \
-      build-base
+RUN apk add --update --no-cache \
+      alpine-sdk@edge \
+      libffi-dev@edge \
+      openssl-dev@edge \
+      build-base@edge
 
 COPY apache-pulsar-client.rpm /workdir/pulsar-client.rpm
 COPY apache-pulsar-client-devel.rpm /workdir/pulsar-client-dev.rpm
