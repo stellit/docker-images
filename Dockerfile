@@ -13,8 +13,9 @@ RUN apk add --update --no-cache \
 RUN apk add --update --no-cache \
       alpine-sdk@edge \
       libffi-dev@edge \
-      openssl-dev@edge \
-      build-base@edge
+      openssl-dev@edge
+
+RUN apk add --update --no-cache build-base@edge
 
 COPY apache-pulsar-client.rpm /workdir/pulsar-client.rpm
 COPY apache-pulsar-client-devel.rpm /workdir/pulsar-client-dev.rpm
