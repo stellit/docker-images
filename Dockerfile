@@ -5,7 +5,7 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
     echo @edge http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 RUN apk add build-base rpm python3 python3-dev
 
