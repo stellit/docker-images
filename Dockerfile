@@ -24,8 +24,7 @@ RUN wget https://archive.apache.org/dist/pulsar/pulsar-2.6.0/RPMS/apache-pulsar-
 RUN wget https://archive.apache.org/dist/pulsar/pulsar-2.6.0/RPMS/apache-pulsar-client-devel-2.6.0-1.x86_64.rpm
 
 RUN rpm -ivh apache-pulsar-client*.rpm
-
-
+RUN mkdir /workdir
 COPY package.json /workdir
 WORKDIR /workdir
 
