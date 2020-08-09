@@ -1,28 +1,23 @@
-FROM node:12.18.0-buster
+FROM node:14.7.0-alpine3.12
 
-LABEL MAINTAINER="stellit.woo@gmail.com"
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 ENV CHROME_BIN=/usr/bin/chromium-browser
 
-# RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list
+RUN apk add build-base rpm python3 python3-dev
 
-RUN apt-get update
+RUN apk add --update --no-cache \
+      chromium@edge \
+      nss@edge \
+      wqy-zenhei@edge \
+      fontconfig ttf-dejavu
+RUN apk add --update --no-cache \
+      alpine-sdk@edge \
+      libffi-dev@edge \
+      openssl-dev@edge
 
-RUN apt-get -y install rpm
-
-COPY apache-pulsar-client.rpm /workdir/pulsar-client.rpm
-COPY apache-pulsar-client-devel.rpm /workdir/pulsar-client-dev.rpm
-
-RUN rpm -ivh /workdir/pulsar-client.rpm
-RUN rpm -ivh /workdir/pulsar-client-dev.rpm
-
-RUN apt-get -y install chromium chromium-l10n fonts-wqy-zenhei ttf-dejavu
-
-# CREATE workdir
-RUN mkdir -p /workdir
-
-COPY package.json /workdir
-
+RUN mkdir /workdir
 WORKDIR /workdir
-
-RUN npm install
+RUN wget https://archive.apache.org/dist/pulsar/pulsar-2.6.0/RPMS/apache-pulsar-client-2.6.0-1.x86_64.rpm
+RUN wget https://archive.apache.org/dist/pulsar/pulsar-2.6.0/RPMS/apache-pulsar-client-devel-2.6.0-1.x86_64.rpm
+RUN rpm -ivh apache-pulsar-client*.rpm
