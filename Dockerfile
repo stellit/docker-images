@@ -1,6 +1,6 @@
 FROM node:14.7.0-alpine3.12
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 ENV CHROME_BIN=/usr/bin/chromium-browser
 
