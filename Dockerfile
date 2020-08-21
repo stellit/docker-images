@@ -1,4 +1,4 @@
-FROM node:14.7.0-alpine3.12
+FROM 12.18.3-alpine3.9
 
 # RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
