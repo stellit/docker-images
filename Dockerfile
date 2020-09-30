@@ -14,7 +14,11 @@ RUN apk add build-base rpm python3 python3-dev
 
 
 RUN mkdir /workdir
+COPY ./package.json /workdir/
 WORKDIR /workdir
+
+RUN cd /workdir
+RUN npm install
 
 RUN wget https://archive.apache.org/dist/pulsar/pulsar-2.6.0/RPMS/apache-pulsar-client-2.6.0-1.x86_64.rpm
 RUN wget https://archive.apache.org/dist/pulsar/pulsar-2.6.0/RPMS/apache-pulsar-client-devel-2.6.0-1.x86_64.rpm
