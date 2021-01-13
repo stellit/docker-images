@@ -1,13 +1,10 @@
-FROM node:11.11.0-alpine
+FROM node:12.20.1-buster
 
-ENV CHROME_BIN=/usr/bin/chromium-browser
-RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
-    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
-    apk add --no-cache \
-      chromium@edge \
-      nss@edge
+RUN apt install ./apache-pulsar-client*.deb
 
-RUN echo @edge http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
-    apk add wqy-zenhei@edge
+RUN mkdir /workdir
+COPY ./package.json /workdir/
+WORKDIR /workdir
 
-RUN apk --update add fontconfig ttf-dejavu
+RUN cd /workdir
+RUN npm install
